@@ -3,6 +3,7 @@ import {
     SPHttpClient,
     SPHttpClientResponse
   } from '@microsoft/sp-http';
+import { IconNames } from "office-ui-fabric-react";
 
 // import * as moment from 'moment';
 
@@ -29,18 +30,26 @@ export default class spservices {
             
             // var response = await this.webPartContext.spHttpClient.get("https://p8lf.sharepoint.com/sites/Mark8ProjectTeam/_api/web/GetFolderByServerRelativeUrl('/sites/Mark8ProjectTeam/Shared%20Documents/')/Files", SPHttpClient.configurations.v1);
 
-            var response = await this.webPartContext.spHttpClient.get("https://p8lf.sharepoint.com/sites/Mark8ProjectTeam/_api/web/GetFolderByServerRelativeUrl('/sites/Mark8ProjectTeam/Shared%20Documents/Design')/Files", SPHttpClient.configurations.v1);
-
-            var response = await this.webPartContext.spHttpClient.get("/sites/Mark8ProjectTeam/_api/web/GetFolderByServerRelativeUrl('/sites/Mark8ProjectTeam/Shared%20Documents/Design')/Files", SPHttpClient.configurations.v1);
+            
+            // var response = await this.webPartContext.spHttpClient.get("/sites/Mark8ProjectTeam/_api/web/GetFolderByServerRelativeUrl('/sites/Mark8ProjectTeam/Shared%20Documents/Design')/Files", SPHttpClient.configurations.v1);
+            
+            
+            /*var response = await this.webPartContext.spHttpClient.get("/sites/Mark8ProjectTeam/_api/web/GetFolderByServerRelativeUrl('/sites/Mark8ProjectTeam/Shared%20Documents')/Files", SPHttpClient.configurations.v1);
             var responseJSON = await response.json();
-
             console.log("responseJSON",responseJSON);
+            return responseJSON.value.map((item: any) => item.Name);*/
 
-            return responseJSON.value.map((item: any) => item.Name);
+            var response = await this.webPartContext.spHttpClient.get("https://p8lf.sharepoint.com/sites/Mark8ProjectTeam/_api/web/lists/getbytitle('Documents')/items(11)/Versions", SPHttpClient.configurations.v1);
+            var responseJSON = await response.json();
+            console.log("responseJSON",responseJSON);
+            return [2,3,4] ; //responseJSON.value.map((item: any) => item.Name);
 
             // return response.json();
 
+            // Names.xlsx is id 11
+// https://p8lf.sharepoint.com/sites/Mark8ProjectTeam/_api/web/lists/getbytitle('Documents')/items(11)/Versions
 
+// https://p8lf.sharepoint.com/sites/Mark8ProjectTeam/_api/web/lists/getbytitle('Documents')/items(11)/Versions
 
 
             // /_api/web/lists/getbytitle('Documents')/items(1)?$select=Title,InternalName,Editor/Title&$expand=Editor/Id
